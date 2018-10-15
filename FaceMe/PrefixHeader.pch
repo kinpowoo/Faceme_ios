@@ -1,0 +1,17 @@
+//
+//  PrefixHeader.pch
+//  FaceMe
+//
+//  Created by JIANBO WANG on 2018/9/8.
+//  Copyright © 2018年 JIANBO WANG. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+
+#import <BmobSDK/Bmob.h>
+#import "ConstantUtil.h"
+
+
+#endif /* PrefixHeader_pch */
