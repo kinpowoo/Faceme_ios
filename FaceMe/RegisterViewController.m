@@ -8,7 +8,7 @@
 
 #import "RegisterViewController.h"
 
-@interface RegisterViewController ()
+@interface RegisterViewController ()  <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *username_tf;
 @property (weak, nonatomic) IBOutlet UITextField *password_tf;
 @property (weak, nonatomic) IBOutlet UIButton *login_btn;
@@ -24,6 +24,8 @@
     _login_btn.layer.borderWidth = 2.0;
     _login_btn.layer.borderColor = [UIColor blueColor].CGColor;
     
+    _username_tf.delegate = self;
+    _password_tf.delegate = self;
 }
 
 
@@ -54,7 +56,14 @@
             [ConstantUtil alert:self title:@"注册提示" msg:@"注册失败!"];
         }
     }];
-    
 }
+
+
+
+-(BOOL)textFieldShouldReturn:(UITextField*)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
 
 @end

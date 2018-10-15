@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 
-@interface RestPasswordViewController (){
+@interface RestPasswordViewController ()  <UITextFieldDelegate>{
     BmobUser *user;
 }
 
@@ -42,6 +42,12 @@
   
     //get user
     user = [ConstantUtil getUser];
+    
+    
+    //register delegate
+    _oldPass.delegate = self;
+    _nPass.delegate = self;
+    _nPassAgain.delegate = self;
 }
 
 
@@ -91,7 +97,13 @@
             }
         }];
     }];
-    
+}
+
+
+// responder keyboard
+-(BOOL)textFieldShouldReturn:(UITextField*)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end
