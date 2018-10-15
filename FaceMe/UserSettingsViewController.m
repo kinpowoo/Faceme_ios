@@ -146,6 +146,7 @@
             
             if(isSuccessful){
                 [ConstantUtil alert:self title:@"更新提示" msg:@"用户信息更新成功!" action:^(){
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"UserUpdate" object:nil];
                     [self.navigationController popViewControllerAnimated:YES];
                 }];
             }else{

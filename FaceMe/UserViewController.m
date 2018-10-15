@@ -98,6 +98,8 @@
                 name:@"StatusDelete" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemAdd:)
                 name:@"StatusAdd" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userUpdate)
+                name:@"UserUpdate" object:nil];
 }
 
 
@@ -135,6 +137,24 @@
     [query whereKey:@"author" equalTo:[BmobUser currentUser]];
     [query countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
         _publishNum.text = [NSString stringWithFormat:@"%d",number];
+    }];
+}
+
+
+
+//用户信息被更新
+-(void)userUpdate{
+    BmobQuery *query = [BmobQuery queryForUser];
+    [query getObjectInBackgroundWithId:[BmobUser currentUser].objectId
+        block:^(BmobObject *object, NSError *error) {
+            if(object){
+                BmobFile *head = [object objectForKey:@"portrait"];
+                [_portrait sd_setImageWithURL:[NSURL URLWithString:head.url]];
+                UIImage* oldImage = [ConstantUtil circleImage:_portrait.image] ;
+                _portrait.image = oldImage;
+                
+                _nickName.text = [object objectForKey:@"nickname"];
+            }
     }];
 }
 
@@ -282,6 +302,7 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"itemUpdate" object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"StatusDelete" object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"StatusAdd" object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"UserUpdate" object:nil];
 }
 
 

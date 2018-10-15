@@ -21,7 +21,7 @@
 
     //登陆按钮样式
     _login_btn.layer.cornerRadius = 8.0;
-    _login_btn.layer.borderWidth = 2.0;
+    _login_btn.layer.borderWidth = 1.0;
     _login_btn.layer.borderColor = [UIColor blueColor].CGColor;
     
     _username_tf.delegate = self;
